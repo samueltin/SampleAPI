@@ -34,4 +34,9 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: app.zip
+    - name: Set startup command
+      run: |
+        az webapp config set --name samtin-sampleapi \
+                         --resource-group learnapimanagement \
+                         --startup-file "gunicorn -k uvicorn.workers.UvicornWorker main:app"
 
